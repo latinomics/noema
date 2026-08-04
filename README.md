@@ -76,6 +76,11 @@ tests/                      # contract tests (run offline, no API keys)
 
 ```
 noema status                           # lineage view: what's cached, spend
+noema doctor                           # preflight: config, prompts, stores, keys
+noema config                           # resolved settings (tiers, budget, paths)
+noema prompts                          # versioned prompt assets + revisions
+noema call <prompt_id> -v k=v ...      # run one prompt through its tier (k=@file)
+noema judge <file> --rubric "..."      # rubric_judge an artifact: score + rationale
 noema ingest <pdf ...>                 # register + run P1        (lands with M1)
 noema extract <src_id>                 # run P2                   (lands with M2)
 noema synthesize --frames 3 --authors  # run P3                   (lands with M3/M4)
