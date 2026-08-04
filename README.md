@@ -94,7 +94,7 @@ Every command is resumable via the manifest cache; `--force` busts it.
 
 ```sh
 uv sync                 # install (python >= 3.12, managed by uv)
-uv run pytest           # 54 tests, fully offline
+uv run pytest           # 69 tests, fully offline
 uv run ruff check .     # lint
 uv run ruff format .    # format
 ```
