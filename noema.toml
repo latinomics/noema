@@ -3,15 +3,15 @@
 # Pipeline code refers to tiers (MAP / REDUCE / JUDGE), never model strings.
 
 [models.map]                      # high-volume per-chunk extraction
-model = "anthropic/claude-haiku-4-5"
+model = "anthropic/claude-sonnet-5"
 temperature = 0.3
 
 [models.reduce]                   # synthesis, fusion, stance authoring
-model = "anthropic/claude-sonnet-4-5"
+model = "anthropic/claude-opus-5"
 temperature = 0.4
 
 [models.judge]                    # eval rubrics, entailment; temperature pinned to 0
-model = "anthropic/claude-haiku-4-5"
+model = "anthropic/claude-sonnet-5"
 temperature = 0.0
 
 [budget]

@@ -101,6 +101,9 @@ class Gateway:
     ) -> None:
         import instructor
 
+        # Reasoning-class models (claude-*-5, o-series) reject sampling params
+        # like temperature; drop what a model doesn't support instead of dying.
+        litellm.drop_params = True
         self.settings = settings
         self.manifest = manifest
         self.prompts = prompts or PromptLib(settings.paths.prompts_dir)

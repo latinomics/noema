@@ -7,7 +7,8 @@ artifact of this system is not a knowledge base but an **intentional stance made
 agent frame with beliefs, desires, and inferential dispositions compiled from source texts.
 
 The authoritative build contract lives in [BLUEPRINT.md](BLUEPRINT.md). To get running, see
-[QUICKSTART.md](QUICKSTART.md).
+[QUICKSTART.md](QUICKSTART.md). For plain-language "how do I run X" recipes, see
+[CHEATSHEET.md](CHEATSHEET.md).
 
 ## How it works
 
