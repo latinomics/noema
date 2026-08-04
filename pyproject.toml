@@ -1,0 +1,55 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "noema"
+version = "0.1.0"
+description = "NOEMA - a knowledge engineering foundry: books -> domain ontologies -> agents with a point of view."
+requires-python = ">=3.12"
+dependencies = [
+    "pydantic>=2.8",
+    "pydantic-settings>=2.6",
+    "litellm>=1.65",
+    "instructor>=1.8",
+    "typer>=0.15",
+    "rich>=13.7",
+    "duckdb>=1.1",
+    "lancedb>=0.16",
+    "networkx>=3.3",
+    "pyyaml>=6.0",
+    "numpy>=1.26",
+    "pyarrow>=17.0",
+]
+
+[project.optional-dependencies]
+# BGE-M3 local embeddings (pulls torch). Without it, stores falls back to the
+# deterministic hash embedder and logs a warning.
+local-embeddings = ["sentence-transformers>=3.0"]
+# Langfuse trace emission (enable via [tracing] in noema.toml + env keys).
+tracing = ["langfuse>=2.50"]
+
+[project.scripts]
+noema = "noema.cli:app"
+
+[dependency-groups]
+dev = ["pytest>=8.2", "ruff>=0.6"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/noema"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "SIM", "RUF"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+filterwarnings = [
+    "ignore::DeprecationWarning",
+    "ignore::PendingDeprecationWarning",
+]

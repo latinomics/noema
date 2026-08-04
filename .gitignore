@@ -1,0 +1,16 @@
+# python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+.python-version
+
+# tooling caches
+.pytest_cache/
+.ruff_cache/
+
+# noema artifacts (content-addressed data plane; never committed)
+data/
+
+# local env
+.env

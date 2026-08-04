@@ -1,0 +1,39 @@
+# NOEMA configuration (pydantic-settings; env overrides use NOEMA_ prefix,
+# nested keys with "__", e.g. NOEMA_MODELS__JUDGE__MODEL=...).
+# Pipeline code refers to tiers (MAP / REDUCE / JUDGE), never model strings.
+
+[models.map]                      # high-volume per-chunk extraction
+model = "anthropic/claude-haiku-4-5"
+temperature = 0.3
+
+[models.reduce]                   # synthesis, fusion, stance authoring
+model = "anthropic/claude-sonnet-4-5"
+temperature = 0.4
+
+[models.judge]                    # eval rubrics, entailment; temperature pinned to 0
+model = "anthropic/claude-haiku-4-5"
+temperature = 0.0
+
+[budget]
+run_usd = 10.0                    # per-run spend budget
+warn_fraction = 0.8               # warn when 80% consumed
+
+[paths]
+data_dir = "data"
+prompts_dir = "prompts"
+
+[embeddings]
+provider = "local"                # local (BGE-M3) | hash (deterministic, dev/tests) | api
+model = "BAAI/bge-m3"
+api_model = ""                    # litellm embedding model string when provider = "api"
+hash_dim = 384
+
+[thresholds]
+docforge_fidelity = 4.2           # mean rubric score over sampled pages
+docforge_span_match = 0.97        # fuzzy span match rate
+ontogen_qa_fidelity = 0.8         # closed-book QA faithfulness
+ontogen_coverage = 0.85           # canonical entities vs GLiNER high-confidence sweep
+gym_min_score = 4.0               # all four probe families must clear this
+
+[tracing]
+langfuse = false                  # true + LANGFUSE_* env keys to emit traces
